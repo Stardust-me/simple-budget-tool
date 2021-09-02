@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	
+		<style>
+			.lang {
+				background-color: cornflowerblue;
+				color: black;
+				height: 1.5rem;
+				width: 2rem;
+				line-height: 1;
+				padding: 0;
+			}
+			.de {
+				position: absolute;
+				right: 1rem;
+				top: 1rem;
+			}
+			.en {
+				position: absolute;
+				right: 1rem;
+				top: 3rem;
+			}
+			.display-4 {font-size: 2.5rem;}
+			.lead {line-height: 1; font-size: 1rem;}
+			hr {border-color: inherit; margin-bottom: 0 !important;}
+			#headerQuestions {font-size: large !important;}
+			#input-questions {margin-left: auto; margin-right: auto; line-height: 1 !important; font-size: smaller;}
+
+			@media screen and (max-width: 992px) {
+				.custom-padl {padding: initial;}
+				.custom-padr {padding: initial;}
+				#input-questions {max-width: 350px !important;}
+			}
+			@media screen and (min-width: 992px) {
+				.custom-padl {padding-left: 0 !important;}
+				.custom-padr {padding-right: 0 !important;}
+				#input-questions {max-width: 800px !important;}
+			}
+			.jumbotron {min-width: 250px; padding: .5rem 4rem 0.5rem 4rem !important; 
+						border-bottom-left-radius: 0; border-bottom-right-radius: 0;}
+			.cont {max-width: 80%; min-width: 250px;}
+			.bg-custom1 {background-color: #0606a5;}
+			.bg-custom2 {background-color: rgb(157, 189, 250);}
+			.bg-custom-grad {background-image: linear-gradient(#0606a5,rgb(157, 189, 250));}
+			.border-danger {border-width: 0.3rem;}
+			.btn-info {background-image: linear-gradient(white,#17a2b8,#17a2b8,#17a2b8,white); 
+						margin-bottom: 2rem; border-color: transparent;}
+			.card-deck {max-width: 1000px;}
+			.custom-h4 {font-size: 1.25rem !important; line-height: 1 !important;}
+			.card-body {padding: 1rem 1.25rem 0 1.25rem; font-size: smaller;}
+			.custom-qlegend {text-align: center;}
+			@media screen and (min-width: 576px){.custom-qlegend {text-align: left;}}
+			.align-custom-sub {vertical-align: sub;}
+			.hide {display: none;}
+			.show {display: inline-block; margin-top: 0.25rem;}
+		</style>
+		
+		<title>Simple Budget Tool</title>
+	</head>
+
+	<body class="text-center text-white bg-custom2">
+
+		<header>
+			<div class="jumbotron bg-custom1 mb-0">
+				<div class="container-fluid">
+					<h1 class="display-4">My Budget</h1>
+					<p><h2 class="lead">Calculate how much money you can spend per day/week until next cash comes in!</h2></p>
+  					<hr class="text-white">
+				</div>
+				<div>
+					<button role="button" class="btn lang de" id="de">DE</button>
+				</div>
+				<div>
+					<button role="button" class="btn lang en" id="en">EN</button>
+				</div>
+
+			</div>
+		</header>
+		
+		<main class="container-fluid bg-custom-grad">
+
+			<form id="form1" class="cont ml-auto mr-auto">
+
+				<fieldset class="form-group row mb-4" id="input-basic">
+					<div class="col-12 col-md">
+						<lable for="money-amount" id="label-money-amount">
+							Actual Cash</label>
+							<div class="w-100"></div>
+							<input type="number" id="money-amount" class="col-auto mt-2 mb-2">
+						
+					</div>
+					<div class="col-12 col-md">
+						<lable for="today" id="label-today">
+							Today's Date
+							<div class="w-100"></div>
+							<input type="date" id="today" class="col-auto mt-2 mb-2">
+						</label>
+					</div>
+					<div class="col-12 col-md">
+						<lable for="cash-day" id="label-cash-day">
+							Date of next Income
+							<div class="w-100"></div>
+							<input type="date" id="cash-day" class="col-auto mt-2 mb-2">
+						</label>
+					</div>
+				</fieldset>
+
+				<fieldset class="row" id="input-questions">
+					<span class="col-12 mb-4" id="headerQuestions">
+						Just a few questions left:
+					</span>
+
+					<div class="col-12 col-lg-6 mr-lg-auto custom-padl">
+						<div class="form-group row col-12 mb-1 ml-auto mr-auto custom-padl" id="group-rent">
+							<legend class="col-sm-2 custom-qlegend custom-padl" id="legend-rent" style="font-size: larger;">
+								Rent
+							</legend>
+							<div class="col-sm-10 text-sm-right">
+								<div class="form-check form-check-inline mr-0">
+									<input type="radio" name="rentOptions" id="rentOption1" class="form-check-input">
+									<label for="rentOption1" class="form-check-label" id="label-rentOption1">Already Paid</label>
+								
+									<input type="radio" name="rentOptions" id="rentOption2" class="form-check-input ml-4">
+									<label for="rentOption2" class="form-check-label" id="label-rentOption2">Not&nbspYet Paid</label>
+								</div>
+								<div>
+									<input type="number" class="col-auto mr-sm-2 hide" id="input-rent" placeholder="How much?">
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group row col-12 mb-1 ml-auto mr-auto custom-padl" id="group-water">
+							<legend class="col-sm-2 custom-qlegend custom-padl" id="legend-water" style="font-size: larger;">
+								Water
+							</legend>
+							<div class="col-sm-10 text-sm-right">
+								<div class="form-check form-check-inline mr-0">
+									<input type="radio" name="waterOptions" id="waterOption1" class="form-check-input">
+									<label for="waterOption1" class="form-check-label" id="label-waterOption1">Already Paid</label>
+								
+									<input type="radio" name="waterOptions" id="waterOption2" class="form-check-input ml-4">
+									<label for="waterOption2" class="form-check-label" id="label-waterOption2">Not&nbspYet Paid</label>
+								</div>
+								<div>
+									<input type="number" class="col-auto mr-sm-2 hide" id="input-water" placeholder="How much?">
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group row col-12 mb-1 ml-auto mr-auto custom-padl" id="group-electric">
+							<legend class="col-sm-2 custom-qlegend custom-padl" id="legend-electric" style="font-size: larger;">
+								Electricity
+							</legend>
+							<div class="col-sm-10 text-sm-right">
+								<div class="form-check form-check-inline mr-0">
+									<input type="radio" name="electricOptions" id="electricOption1" class="form-check-input">
+									<label for="electricOption1" class="form-check-label" id="label-electricOption1">Already Paid</label>
+								
+									<input type="radio" name="electricOptions" id="electricOption2" class="form-check-input ml-4">
+									<label for="electricOption2" class="form-check-label" id="label-electricOption2">Not&nbspYet Paid</label>
+								</div>
+								<div>
+									<input type="number" class="col-auto mr-sm-2 hide" id="input-electric" placeholder="How much?">
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group row col-12 mb-1 ml-auto mr-auto custom-padl" id="group-heat">
+							<legend class="col-sm-2 custom-qlegend custom-padl" id="legend-heat" style="font-size: larger;">
+								Heating
+							</legend>
+							<div class="col-sm-10 text-sm-right">
+								<div class="form-check form-check-inline mr-0">
+									<input type="radio" name="heatingOptions" id="heatOption1" class="form-check-input">
+									<label for="heatOption1" class="form-check-label" id="label-heatOption1">Already Paid</label>
+								
+									<input type="radio" name="heatingOptions" id="heatOption2" class="form-check-input ml-4">
+									<label for="heatOption2" class="form-check-label" id="label-heatOption2">Not&nbspYet Paid</label>
+								</div>
+								<div>
+									<input type="number" class="col-auto mr-sm-2 hide" id="input-heat" placeholder="How much?">
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group row col-12 mb-1 ml-auto mr-auto custom-padl" id="group-phone">
+							<legend class="col-sm-2 custom-qlegend custom-padl" id="legend-phone" style="font-size: larger;">
+								Telephone
+							</legend>
+							<div class="col-sm-10 text-sm-right">
+								<div class="form-check form-check-inline mr-0">
+									<input type="radio" name="phoneOptions" id="phoneOption1" class="form-check-input">
+									<label for="phoneOption1" class="form-check-label" id="label-phoneOption1">Already Paid</label>
+								
+									<input type="radio" name="phoneOptions" id="phoneOption2" class="form-check-input ml-4">
+									<label for="phoneOption2" class="form-check-label" id="label-phoneOption2">Not&nbspYet Paid</label>
+								</div>
+								<div>
+									<input type="number" class="col-auto mr-sm-2 hide" id="input-phone" placeholder="How much?">
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group row col-12 mb-1 ml-auto mr-auto custom-padl" id="group-internet">
+							<legend class="col-sm-2 custom-qlegend custom-padl" id="legend-internet" style="font-size: larger;">
+								internet
+							</legend>
+							<div class="col-sm-10 text-sm-right">
+								<div class="form-check form-check-inline mr-0">
+									<input type="radio" name="internetOptions" id="internetOption1" class="form-check-input">
+									<label for="internetOption1" class="form-check-label" id="label-internetOption1">Already Paid</label>
+								
+									<input type="radio" name="internetOptions" id="internetOption2" class="form-check-input ml-4">
+									<label for="internetOption2" class="form-check-label" id="label-internetOption2">Not&nbspYet Paid</label>
+								</div>
+								<div>
+									<input type="number" class="col-auto mr-sm-2 hide" id="input-internet" placeholder="How much?">
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-12 col-lg-6 ml-lg-auto custom-padr">
+						<div class="form-group row col-12 mb-1 ml-auto mr-auto custom-padr" id="group-insurance">
+							<legend class="col-sm-2 custom-qlegend  custom-padl" id="legend-insurance" style="font-size: larger;">
+								Insurance
+							</legend>
+							<div class="col-sm-10 text-sm-right">
+								<div class="form-check form-check-inline mr-0">
+									<input type="radio" name="insuranceOptions" id="insuranceOption1" class="form-check-input">
+									<label for="insuranceOption1" class="form-check-label" id="label-insuranceOption1">Already Paid</label>
+								
+									<input type="radio" name="insuranceOptions" id="insuranceOption2" class="form-check-input ml-4">
+									<label for="insuranceOption2" class="form-check-label" id="label-insuranceOption2">Not&nbspYet Paid</label>
+								</div>
+								<div>
+									<input type="number" class="col-auto mr-sm-2 hide" id="input-insurance" placeholder="How much?">
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group row col-12 mb-1 ml-auto mr-auto custom-padr" id="group-loan">
+							<legend class="col-sm-2 custom-qlegend custom-padl" id="legend-loan" style="font-size: larger;">
+								Loans
+							</legend>
+							<div class="col-sm-10 text-sm-right">
+								<div class="form-check form-check-inline mr-0">
+									<input type="radio" name="loanOptions" id="loanOption1" class="form-check-input">
+									<label for="loanOption1" class="form-check-label" id="label-loanOption1">Already Paid</label>
+								
+									<input type="radio" name="loanOptions" id="loanOption2" class="form-check-input ml-4">
+									<label for="loanOption2" class="form-check-label" id="label-loanOption2">Not&nbspYet Paid</label>
+								</div>
+								<div>
+									<input type="number" class="col-auto mr-sm-2 hide" id="input-loan" placeholder="How much?">
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group row col-12 mb-1 ml-auto mr-auto custom-padr" id="group-media">
+							<legend class="col-sm-2 custom-qlegend custom-padl" id="legend-media" style="font-size: larger;">
+								Media
+							</legend>
+							<div class="col-sm-10 text-sm-right">
+								<div class="form-check form-check-inline mr-0">
+									<input type="radio" name="mediaOptions" id="mediaOption1" class="form-check-input">
+									<label for="mediaOption1" class="form-check-label" id="label-mediaOption1">Already Paid</label>
+								
+									<input type="radio" name="mediaOptions" id="mediaOption2" class="form-check-input ml-4">
+									<label for="mediaOption2" class="form-check-label" id="label-mediaOption2">Not&nbspYet Paid</label>
+								</div>
+								<div>
+									<input type="number" class="col-auto mr-sm-2 hide" id="input-media" placeholder="How much?">
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group row col-12 mb-1 ml-auto mr-auto custom-padr" id="group-club">
+							<legend class="col-sm-2 custom-qlegend custom-padl" id="legend-club" style="font-size: larger;">
+								Clubs
+							</legend>
+							<div class="col-sm-10 text-sm-right">
+								<div class="form-check form-check-inline mr-0">
+									<input type="radio" name="clubOptions" id="clubOption1" class="form-check-input">
+									<label for="clubOption1" class="form-check-label" id="label-clubOption1">Already Paid</label>
+								
+									<input type="radio" name="clubOptions" id="clubOption2" class="form-check-input ml-4"> 
+									<label for="clubOption2" class="form-check-label" id="label-clubOption2">Not&nbspYet Paid</label>
+								</div>
+								<div>
+									<input type="number" class="col-auto mr-sm-2 hide" id="input-club" placeholder="How much?">
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group row col-12 mb-1 ml-auto mr-auto custom-padr" id="group-diff">
+							<legend class="col-sm-4 custom-qlegend custom-padl" id="legend-diff" style="font-size: larger;">
+								Anything else?
+							</legend>
+							<div class="col-sm-8 text-sm-right">
+								<div class="form-check form-check-inline mr-0">
+									<input type="radio" name="diffOptions" id="diffOption1" class="form-check-input">
+									<label for="diffOption1" class="form-check-label" id="label-diffOption3">No</label>
+								
+									<input type="radio" name="diffOptions" id="diffOption2" class="form-check-input ml-4">
+									<label for="diffOption2" class="form-check-label" id="label-diffOption4">Yes</label>
+								</div>
+								<div>
+									<input type="number" class="col-auto mr-sm-2 hide" id="input-diff" placeholder="How much?">
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</fieldset>
+
+				<div class="row justify-content-center" id="calc-button">
+					<button type="button" class="btn btn-info mt-1 mb-3" id="calc">
+						Calculate !
+					</button>
+				</div>
+			
+			</form>
+
+			<div class="row card-deck cont ml-auto mr-auto">
+
+				<div class="card mb-4 ml-4 mr-4" id="result-week">
+					<div class="card-header bg-custom1">
+						<h3 class="h4 custom-h4" id="budgetHeader-week">Budget per Week</h3>
+					</div>
+					<div class="card-body bg-white text-dark" id="budgetBody-week">
+						<p>No Cash - No Budget...</p>
+					</div>
+				</div>
+			
+				<div class="card mb-4 ml-4 mr-4"  id="result-day">
+					<div class="card-header bg-custom1">
+						<h3 class="h4 custom-h4"id="budgetHeader-day">Budget per Day</h3>
+					</div>
+					<div class="card-body bg-white text-dark" id="budgetBody-day">
+						<p>No Cash - No Budget...</p>
+					</div>
+				</div>
+
+			</div>
+
+		</main>
+
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	
+		<script>
+			$(document).ready( function() {
+
+				var_lang = 'de';
+				
+				langBasic(var_lang);
+				preset ();
+				langCalc(var_lang, 0);
+
+				$('.lang').click(function() {
+					langChoose ($(this).attr('id'));
+				});
+
+				$('[type=date]').change(function(){
+					dateControl ();
+				});
+
+				$('[id*=Option]').click(function () {
+					radioControl ();
+				});
+
+				$('#calc').click(function() {
+					calculate ();
+				});
+
+				$(document).on('keypress', function(e) {
+    				if(e.which == 13) {
+						event.preventDefault();
+						calculate ();
+					}
+				});
+			
+			});
+
+			function preset () {
+
+				if (var_lang == 'de') {
+					$('#de').css('color', 'whitesmoke');
+					$('#en').css('color', 'black');
+				}
+				else {
+					$('#de').css('color', 'black');
+					$('#en').css('color', 'whitesmoke');
+				}
+
+				now = new Date();
+				last = new Date(now.getFullYear(),now.getMonth()+1,0);
+
+				var_cash= parseInt(0); var_days=0; var_weeks=0; var_weeksRem=0;
+				var_perDay=0; var_perWeek=0; var_perWeekFloor=0; var_perDayFloor=0;
+
+				let var_dateNow = now.getFullYear() + '-' + ('0'+(now.getMonth()+1)).slice(-2) + '-' + ('0'+now.getDate()).slice(-2);
+				let var_datecash = last.getFullYear() + '-' + ('0'+(last.getMonth()+1)).slice(-2) + '-' + ('0'+last.getDate()).slice(-2);
+				$('#today').val(var_dateNow);
+				$('#cash-day').val(var_datecash);
+
+				$('input[id*="Option1"]').each(function() {
+					$(this).click();
+				});
+
+				radioControl ();
+
+			}
+
+			function langChoose (lang){
+
+				if (lang == 'de') {
+					var_lang = 'de';
+					$('#de').css('color', 'whitesmoke');
+					$('#en').css('color', 'black');
+				}
+				else {
+					var_lang = 'en';
+					$('#de').css('color', 'black');
+					$('#en').css('color', 'whitesmoke');
+				}
+				
+				langBasic(var_lang);
+				calculate ();
+			}
+
+			function langBasic (lang) {
+				let phHowMuch = '';
+
+				if (lang == 'de') {
+
+					phHowMuch = 'Wieviel?'
+					$('input[id^=input-]').attr('placeholder', phHowMuch);
+
+					$('h2').html('Berechne, wieviel Geld Du ab heute bis zum nächsten Geldeingang pro Tag/Woche ausgeben kannst!')
+					$('#label-money-amount').contents().get(0).nodeValue = 'Verfügbare Geldsumme';
+					$('#label-today').contents().get(0).nodeValue = 'Heutiges Datum';
+					$('#label-cash-day').contents().get(0).nodeValue = 'Nächster Geldeingang';
+					$('#headerQuestions').html('Noch ein paar kleine Fragen:');
+
+					$('#legend-rent').html('Miete');
+					$('#legend-water').html('Wasser');
+					$('#legend-electric').html('Strom');
+					$('#legend-heat').html('Heizung');
+					$('#legend-phone').html('Telefon');
+					$('#legend-internet').html('Internet');
+					$('#legend-insurance').html('Versicherung');
+					$('#legend-loan').html('Kredite');
+					$('#legend-media').html('Media');
+					$('#legend-club').html('Clubs');
+					$('#legend-diff').html('Noch etwas?');
+
+					$('label[id*="Option1"]').html('Schon gezahlt');
+					$('label[id*="Option2"]').html('Noch offen');
+					$('label[id*="Option3"]').html('Nein');
+					$('label[id*="Option4"]').html('Ja');
+
+					$('#calc').html('Berechnen !');
+					$('#budgetHeader-week').html('Budget pro Woche');
+					$('#budgetHeader-day').html('Budget pro Tag');
+
+				}
+				else { //if (lang == 'en')
+
+					phHowMuch ='How much?';
+					$('input[id^=input-]').attr('placeholder', phHowMuch);
+
+					$('h2').html('Calculate how much money you can spend per day/week until next cash comes in!')
+					$('#label-money-amount').contents().get(0).nodeValue = 'Actual Cash';
+					$('#label-today').contents().get(0).nodeValue = 'Today\'s Date';
+					$('#label-cash-day').contents().get(0).nodeValue = 'Date of next Income';
+					$('#headerQuestions').html('Just a few questions left:');
+
+					$('#legend-rent').html('Rent');
+					$('#legend-water').html('Water');
+					$('#legend-electric').html('Electricity');
+					$('#legend-heat').html('Heating');
+					$('#legend-phone').html('Telephone');
+					$('#legend-internet').html('Internet');
+					$('#legend-insurance').html('Insurance');
+					$('#legend-loan').html('Loans');
+					$('#legend-media').html('Media');
+					$('#legend-club').html('Clubs');
+					$('#legend-diff').html('Anything else?');
+
+					$('label[id*="Option1"]').html('Already Paid');
+					$('label[id*="Option2"]').html('Not&nbsp;Yet Paid');
+					$('label[id*="Option3"]').html('No');
+					$('label[id*="Option4"]').html('Yes');
+
+					$('#calc').html('Calculate !');
+					$('#budgetHeader-week').html('Budget per Week');
+					$('#budgetHeader-day').html('Budget per Day');
+
+				}
+			}
+
+			function langCalc (lang, cased) {
+
+				let w = ''; let d = '';
+				let wText1 = ''; let wText2 = '';
+				let endText1 = ''; let endText2 = '';
+				let nobText = ''; let checkText = '';
+
+				if (lang == 'de') {
+
+					nobText =		'No Cash - No Budget...';
+					day0Text =		'Die Eingaben bitte kontrollieren. <br>Ist der heutige Tag wirklich der Tag des Geldeingangs?!'
+					daypastText =	'Die Eingaben bitte kontrollieren. <br>Der Tag des nächsten Geldeingangs liegt in der Vergangenheit?!'
+					billText =		'Die Eingaben bitte kontrollieren. <br>Wie hoch sind die noch zu zahlenden Rechnungen?'
+					exceedText =	'Die Eingaben bitte kontrollieren. <br>Die noch zu zahlenden Ausgaben übersteigen die aktuell verfügbare Geldsumme!'
+					checkText =		'Die Eingaben bitte kontrollieren. <br>Budget kann nicht berechnet werden!'
+					endText1 =		' übrig, bevor es wieder&nbsp;Bares gibt: ';
+					endText2 =		' bevor frisches&nbsp;Geld kommt.';
+
+					if (cased == 0) {
+							$('#budgetBody-week').html('<p>'+nobText+'</p>');
+							$('#budgetBody-day').html('<p>'+nobText+'</p>');
+					}
+					else if (cased == 1) {
+								$('#budgetBody-week').html('<p>'+day0Text+'</p>');
+								$('#budgetBody-day').html('<p>'+day0Text+'</p>');
+					}		
+					else if (cased == 2) {
+								$('#budgetBody-week').html('<p>'+daypastText+'</p>');
+								$('#budgetBody-day').html('<p>'+daypastText+'</p>');
+					}		
+					else if (cased == 3) {
+							if (var_weeks == 1) {w = 'Woche';} else {w = 'Wochen';}
+							if (var_weeksRem > 0) {
+								if (var_weeksRem == 1) {d = 'Tag';} else {d = 'Tage';}
+								wText1 = ' plus '+var_weeksRem+'&nbsp;'+d+' zusätzlich';
+								wText2 = 'und für jeden zusätzlichen einzelnen Tag können '+var_perDayFloor+'&nbsp;€ ausgegeben werden,';
+							}
+							$('#budgetBody-week').html(
+								'<p>'+var_weeks+' ganze '+w+wText1+endText1+'</p>'+
+								'<p>Für jede ganze Woche kann '+var_perWeekFloor+'&nbsp;€ '+wText2+endText2+'</p>'
+							);
+
+							if (var_days == 1) {d = 'Tag';} else {d = 'Tage';}
+							$('#budgetBody-day').html(
+							'<p>'+var_days+'&nbsp;'+d+' '+endText1+'</p>'+
+							'<p>Es können '+var_perDayFloor+'&nbsp;€ pro&nbsp;Tag ausgegeben werden,'+endText2+'</p>'
+							);
+					}
+					else if (cased == 4) {
+						$('#budgetBody-week').html('<p>'+billText+'</p>');
+						$('#budgetBody-day').html('<p>'+billText+'</p>');
+					}
+					else if (cased == 5) {
+						$('#budgetBody-week').html('<p>'+exceedText+'</p>');
+						$('#budgetBody-day').html('<p>'+exceedText+'</p>');
+					}
+					else {
+							$('#budgetBody-week').html('<p>'+checkText+'</p>');
+						$('#budgetBody-day').html('<p>'+checkText+'</p>');
+					}
+
+				}
+				else { //if (lang == 'en')
+				
+					nobText = 		'No Cash - No Budget...';
+					day0Text = 		'Check the entries, please. <br>Is today really the day of the next income?'
+					daypastText =	'Check the entries, please. <br>Day of the next income is in the past?!'
+					billText =		'Check the entries, please. <br>How much are the remaining bills to pay?'
+					exceedText =	'Check the entries, please. <br>The expenses exceed the available amount of money!'
+					checkText = 	'Check the entries, please. <br> Calculation is not possible.'
+					endText1 = 		' &nbspleft <br>until you get new&nbsp;cash: ';
+					endText2 = 		' before you get fresh&nbsp;money.';
+
+					if (cased == 0) {
+							$('#budgetBody-week').html('<p>'+nobText+'</p>');
+							$('#budgetBody-day').html('<p>'+nobText+'</p>');
+					}
+					else if (cased == 1) {
+								$('#budgetBody-week').html('<p>'+day0Text+'</p>');
+								$('#budgetBody-day').html('<p>'+day0Text+'</p>');
+					}		
+					else if (cased == 2) {
+								$('#budgetBody-week').html('<p>'+daypastText+'</p>');
+								$('#budgetBody-day').html('<p>'+daypastText+'</p>');
+					}		
+					else if (cased == 3) {
+							if (var_weeks == 1) {w = 'week';} else {w = 'weeks';}
+							if (var_weeksRem > 0) {
+								if (var_weeksRem == 1) {d = 'day';} else {d = 'days';}
+								wText1 = ' plus '+var_weeksRem+'&nbsp;additional&nbsp;'+d;
+								wText2 = 'and '+var_perDayFloor+'&nbsp;€ for each additional day ';
+							}
+							$('#budgetBody-week').html(
+								'<p>'+var_weeks+' whole '+w+wText1+endText1+'</p>'+
+								'<p>You can spend '+var_perWeekFloor+'&nbsp;€ per whole week '+wText2+endText2+'</p>'
+							);
+
+							if (var_days == 1) {d = 'day';} else {d = 'days';}
+							$('#budgetBody-day').html(
+							'<p>'+var_days+'&nbsp;'+d+' '+endText1+'</p>'+
+							'<p>You can spend '+var_perDayFloor+'&nbsp;€ per&nbsp;day <br>'+endText2+'</p>'
+							);
+					}
+					else if (cased == 4) {
+						$('#budgetBody-week').html('<p>'+billText+'</p>');
+						$('#budgetBody-day').html('<p>'+billText+'</p>');
+					}
+					else if (cased == 5) {
+						$('#budgetBody-week').html('<p>'+exceedText+'</p>');
+						$('#budgetBody-day').html('<p>'+exceedText+'</p>');
+					}
+					else {
+						if (!var_cash > 0) {
+							$('#budgetBody-week').html('<p>'+nobText+'</p>');
+							$('#budgetBody-day').html('<p>'+nobText+'</p>');
+						}
+						else {
+							$('#budgetBody-week').html('<p>'+checkText+'</p>');
+						$('#budgetBody-day').html('<p>'+checkText+'</p>');
+						}
+					}
+				}
+			}
+		
+			function dateControl() {
+
+					if ( ($('#today').val() > $('#cash-day').val())	|| ($('#today').val() == $('#cash-day').val()) ) {
+						$('[type=date]').addClass('border-danger');
+					}
+					else {
+						$('[type=date]').removeClass('border-danger');
+					}
+			}
+
+			function calculate () {
+
+				const one_day = (24*60*60*1000);
+				
+				var_cashStart = $('#money-amount').val();
+				var_today = $('#today').val();
+				var_cashDay = $('#cash-day').val();
+
+				let sum = parseInt(0);
+				$('input[id^=input-]').each(function() {
+					let val = $(this).val();
+						let cat = $(this).attr('id').split('-')[1]+'Option2';
+						if ($('#'+cat).is(':checked')) {
+							if ( val > 0 ) {
+							sum = sum + parseInt($(this).val());
+						}
+						else {
+							sum = 'Nope';
+							return false;
+						}
+					}
+				});
+				if (sum > 0) var_cash = var_cashStart - sum; else var_cash = var_cashStart;
+
+				var_days = ((new Date(var_cashDay)-new Date(var_today))/one_day);
+				var_perDay = var_cash/var_days;
+
+				if (var_days%7) {
+					var_weeks = parseInt(var_days/7);
+					var_weeksRem = var_days%7;
+				}
+				else {
+					var_weeks = var_days/7;
+					var_weeksRem = 0;
+				}
+				if (var_weeks>0) var_perWeek=var_perDay*7; else var_perWeek=0;
+
+				var_perWeekFloor = stringDown(var_perWeek.toFixed(4));
+				var_perDayFloor = stringDown(var_perDay.toFixed(4));
+
+				console.log('sum: '+sum+', weeks: '+var_weeks+', lefts: '+var_weeksRem+', per Week: '+var_perWeekFloor+', days: '+var_days+', per Day: '+var_perDay+'|'+var_perDayFloor+', Cash: '+parseInt(var_cash)+', Sum: '+sum);
+				
+				let cased = 0;
+				if (!var_cashStart > 0) {console.log('No CASH'); cased = 0;}
+				else if (var_days === 0) {console.log('No Day'); cased = 1;}
+				else if (var_days < 0) {console.log('Minus Day'); cased = 2;}
+				else if (sum == 'Nope') {cased = 4;}
+				else if (var_cash<0) {cased = 5;}
+				else if ($.isNumeric(var_cash)) {cased = 3;}
+				else {cased = 99;}
+
+				langCalc (var_lang, cased);
+
+			}
+
+			function radioControl () {
+
+				$('input[id*="Option1"]').each(function() {
+					let labelFor = $(this).attr('id');
+					let ca = 'input-' + labelFor.split('Option')[0];
+
+					if ($(this).is(':checked')) {
+						$('label[for=' + labelFor + ']').css('color', '#8bf28b');
+					}
+					else {
+						$('label[for=' + labelFor + ']').css('color', 'white');
+					}
+				});
+
+				$('input[id*="Option2"]').each(function() {
+					let labelFor = $(this).attr('id');
+					let ca = 'input-' + labelFor.split('Option')[0];
+
+					if ($(this).is(':checked')) {
+						$('label[for=' + labelFor + ']').css('color', 'red');
+						if ($('input[id='+ ca +']').hasClass('hide')) {
+							$('input[id='+ ca +']').removeClass('hide');
+							$('input[id='+ ca +']').addClass('show');
+						}
+					}
+					else {
+						$('label[for=' + labelFor + ']').css('color', 'white');
+						if ($('input[id='+ ca +']').hasClass('show')) {
+							$('input[id='+ ca +']').removeClass('show');
+							$('input[id='+ ca +']').addClass('hide');
+						}
+					}
+				});
+			}
+
+			function stringDown (string) {
+				let pos = string.indexOf('.');
+				let result = string.substr(0,pos)+string.substr(pos,3);
+				return (result);
+			}
+
+		</script>
+	
+	</body>
+</html>
